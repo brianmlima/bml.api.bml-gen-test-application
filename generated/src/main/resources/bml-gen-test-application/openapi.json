@@ -1,0 +1,101 @@
+{
+  "components": {
+    "schemas": {
+      "account": {
+        "description": "This is the top level in the system. It represents a specific client.",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string"
+          },
+          "enabled": {
+            "type": "boolean"
+          }
+        },
+        "type": "object"
+      },
+      "account_form": {
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "enabled": {
+            "type": "boolean"
+          }
+        },
+        "type": "object"
+      },
+      "healthcheck": {
+        "properties": {
+          "status": {
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "test_enumeration": {
+        "description": "Test Enumeration provides a useful test for enumeration based code generation",
+        "enum": [
+          "foo",
+          "bar"
+        ],
+        "type": "string"
+      }
+    }
+  },
+  "info": {
+    "contact": {},
+    "license": {},
+    "termsOfService": "",
+    "title": "bml-gen-test-application",
+    "version": "0.0.1"
+  },
+  "openapi": "3.0.2",
+  "paths": {
+    "/accounts/:id": {
+      "get": {
+        "operationId": "get--accounts-id",
+        "parameters": [
+          {
+            "deprecated": false,
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "description": "The Universally Unique Identifier for an existing account resource. See RFC 4122",
+            "name": "id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "headers": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized",
+            "headers": {}
+          },
+          "404": {
+            "description": "Not Found",
+            "headers": {}
+          }
+        },
+        "tags": [
+          "account"
+        ]
+      }
+    }
+  },
+  "servers": [
+    {}
+  ]
+}

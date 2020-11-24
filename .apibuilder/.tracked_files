@@ -1,0 +1,58 @@
+---
+bml:
+  bml-gen-test-application:
+    bml_lombok:
+    - generated/src/main/java/org/bml/bml/gen/test/application/v0/models/Account.java
+    - generated/src/main/java/org/bml/bml/gen/test/application/v0/models/AccountForm.java
+    - generated/src/main/java/org/bml/bml/gen/test/application/v0/models/Healthcheck.java
+    - generated/src/main/java/org/bml/bml/gen/test/application/v0/models/TestEnumeration.java
+    bml_lombok_test:
+    - generated/src/test/java/org/bml/bml/gen/test/application/v0/models/ExerciseEnumTests.java
+    - generated/src/test/java/org/bml/bml/gen/test/application/v0/models/ExercisePojoValidationTests.java
+    - generated/src/test/java/org/bml/bml/gen/test/application/v0/models/ExercisePojosTests.java
+    - generated/src/test/java/org/bml/bml/gen/test/application/v0/models/factory/AccountFormMockFactory.java
+    - generated/src/test/java/org/bml/bml/gen/test/application/v0/models/factory/AccountMockFactory.java
+    - generated/src/test/java/org/bml/bml/gen/test/application/v0/models/factory/HealthcheckMockFactory.java
+    - generated/src/test/java/org/bml/bml/gen/test/application/v0/tool/Languages.java
+    - generated/src/test/java/org/bml/bml/gen/test/application/v0/tool/LoremTool.java
+    - generated/src/test/java/org/bml/bml/gen/test/application/v0/tool/ProbabilityTool.java
+    - generated/src/test/java/org/bml/bml/gen/test/application/v0/tool/TestSuppliers.java
+    java_client:
+    - generated/src/test/java/org/bml/bml/gen/test/application/v0/client/BmlGenTestApplicationClient.java
+    jpa_repository:
+    - generated/src/main/java/org/bml/bml/gen/test/application/v0/jpa/AccountRepository.java
+    openapi:
+    - generated/src/main/resources/bml-gen-test-application/openapi.json
+    postman_collection_2_1:
+    - generated/src/main/resources/org/bml/bml/gen/test/application/v0/bml_bml_gen_test_application_v0_postman_collection.json
+    spring_service:
+    - generated/src/main/java/org/bml/bml/gen/test/application/v0/config/BmlGenTestApplicationBaseConfiuration.java
+    - generated/src/main/java/org/bml/bml/gen/test/application/v0/config/SwaggerUiConfig.java
+    - generated/src/main/java/org/bml/bml/gen/test/application/v0/controller/AccountController.java
+    - generated/src/main/java/org/bml/bml/gen/test/application/v0/controller/ApiImplementationException.java
+    - generated/src/main/java/org/bml/bml/gen/test/application/v0/controller/MethodArgumentNotValidExceptionHandler.java
+    - generated/src/main/java/org/bml/bml/gen/test/application/v0/converter/ConfigureConverters.java
+    - generated/src/main/java/org/bml/bml/gen/test/application/v0/converter/StringToTestEnumerationConverter.java
+    - generated/src/main/java/org/bml/bml/gen/test/application/v0/service/AccountService.java
+    - generated/src/main/java/org/bml/bml/gen/test/application/v0/service/ResponseModelGetAccountById.java
+  validation:
+    bml_lombok:
+    - generated/src/main/java/org/bml/validation/v0/models/ConflictResourceExistsResponse.java
+    - generated/src/main/java/org/bml/validation/v0/models/FieldValidationError.java
+    - generated/src/main/java/org/bml/validation/v0/models/FieldValidationErrorEntry.java
+    - generated/src/main/java/org/bml/validation/v0/models/FieldValidationErrorType.java
+    - generated/src/main/java/org/bml/validation/v0/models/FieldValidationResponse.java
+    bml_lombok_test:
+    - generated/src/test/java/org/bml/validation/v0/models/ExerciseEnumTests.java
+    - generated/src/test/java/org/bml/validation/v0/models/ExercisePojoValidationTests.java
+    - generated/src/test/java/org/bml/validation/v0/models/ExercisePojosTests.java
+    - generated/src/test/java/org/bml/validation/v0/models/factory/ConflictResourceExistsResponseMockFactory.java
+    - generated/src/test/java/org/bml/validation/v0/models/factory/FieldValidationErrorEntryMockFactory.java
+    - generated/src/test/java/org/bml/validation/v0/models/factory/FieldValidationErrorMockFactory.java
+    - generated/src/test/java/org/bml/validation/v0/models/factory/FieldValidationResponseMockFactory.java
+    - generated/src/test/java/org/bml/validation/v0/tool/Languages.java
+    - generated/src/test/java/org/bml/validation/v0/tool/LoremTool.java
+    - generated/src/test/java/org/bml/validation/v0/tool/ProbabilityTool.java
+    - generated/src/test/java/org/bml/validation/v0/tool/TestSuppliers.java
+    bml_openapi:
+    - generated/src/main/resources/static/bml-gen-test-application/Validation.yml

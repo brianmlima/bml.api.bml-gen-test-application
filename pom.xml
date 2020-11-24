@@ -1,0 +1,581 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.4.0</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+    <groupId>org.bml</groupId>
+    <artifactId>gen-test-application</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>gen-test-application</name>
+    <description>Apibuilder.io BML Generator Test Service Project</description>
+
+    <properties>
+        <java.version>1.8</java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <compiler.args></compiler.args>
+        <!-- Always check for new versions -->
+        <repository.update.policy>always</repository.update.policy>
+
+        <springfox.version>3.0.0</springfox.version>
+        <guava.version>30.0-jre</guava.version>
+        <lorem.version>2.1</lorem.version>
+        <junit.jupiter.version>5.7.0</junit.jupiter.version>
+        <jackson-bom.version>2.11.3</jackson-bom.version>
+
+        <logback.configurationFile>${project.basedir}/conf/logback-error.xml</logback.configurationFile>
+
+
+        <surefire.trimStackTrace>false</surefire.trimStackTrace>
+        <maven-surefire-plugin.forkCount>5</maven-surefire-plugin.forkCount>
+        <maven-surefire-plugin.reuseForks>true</maven-surefire-plugin.reuseForks>
+        <maven-surefire-plugin.skipAfterFailureCount>0</maven-surefire-plugin.skipAfterFailureCount>
+        <maven-surefire-plugin.testFailureIgnore>true</maven-surefire-plugin.testFailureIgnore>
+
+        <!-- SpotBugs is a more security oriented findbugs -->
+        <spotbugs.plugun.version>4.1.3</spotbugs.plugun.version>
+        <spotbugs.plugin.include.filter.path>
+            ${session.executionRootDirectory}/conf/spotbugs/spotbugs-security-include.xml
+        </spotbugs.plugin.include.filter.path>
+        <spotbugs.plugin.exclude.filter.path>
+            ${session.executionRootDirectory}/conf/spotbugs/spotbugs-security-exclude.xml
+        </spotbugs.plugin.exclude.filter.path>
+        <spotbugs.skip>false</spotbugs.skip>
+
+        <!-- JaCoCo Version -->
+        <jacoco-maven-plugin.version>0.8.6</jacoco-maven-plugin.version>
+
+
+        <!-- CHECKSTYLE -->
+        <!-- Lets the project relative location of our checkstyle rules -->
+        <maven-checkstyle-plugin.configLocation>${basedir}/conf/checkstyle/checkstyle.xml
+        </maven-checkstyle-plugin.configLocation>
+
+        <!-- Checkstyle version. CheckStyle checks source code for style violations  -->
+        <checkstyle.plugin.version>3.0.0</checkstyle.plugin.version>
+        <!-- Build properties that can be changed by the child pom in profiles -->
+        <checkstyle.version>8.4</checkstyle.version>
+        <maven-checkstyle-plugin.failOnViolation>true</maven-checkstyle-plugin.failOnViolation>
+
+
+
+        <!-- jacoco figures out test coverage to the branch for us -->
+        <jacoco.reportPath>>${project.build.directory}/jacoco.exec</jacoco.reportPath>
+        <jacoco.itReportPath>>${project.build.directory}/jacoco-it.exec</jacoco.itReportPath>
+
+
+        <!-- LOGBACK CONFIG -->
+        <logback.configurationFile>${basedir}/conf/logback.xml</logback.configurationFile>
+        <!-- REPORTING -->
+        <org.apache.maven.plugins.maven-site-plugin.version>3.9.1</org.apache.maven.plugins.maven-site-plugin.version>
+        <org.apache.maven.plugins.maven-project-info-reports-plugin.version>3.1.1
+        </org.apache.maven.plugins.maven-project-info-reports-plugin.version>
+
+        <!-- Javadoc Plugin Version -->
+        <javadoc.plugin.version>3.0.0-M1</javadoc.plugin.version>
+        <javadoc.detect.links>true</javadoc.detect.links>
+
+
+
+
+
+
+
+
+    </properties>
+
+    <profiles>
+        <!-- The DEFAULT prod profile USE : mvn -P prod clean package
+        tests ENABLED FAIL FAST
+        findbugs ENABLED FAIL BUILD
+        checkstyle ENABLED FAIL BUILD
+        javadoc ENABLED FAIL BUILD
+        -->
+        <profile>
+            <id>prod</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <properties>
+                <checkstyle.skip>false</checkstyle.skip>
+                <findbugs.skip>false</findbugs.skip>
+                <skipTests>false</skipTests>
+                <maven.javadoc.skip>false</maven.javadoc.skip>
+                <spotbugs.skip>false</spotbugs.skip>
+
+            </properties>
+        </profile>
+    </profiles>
+
+
+    <dependencies>
+
+        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-integration -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-integration</artifactId>
+            <version>2.4.0</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-validation -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-web -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-webflux -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-webflux</artifactId>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-websocket -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-websocket</artifactId>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-jpa -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-devtools -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson/jackson-bom -->
+        <dependency>
+            <groupId>com.fasterxml.jackson</groupId>
+            <artifactId>jackson-bom</artifactId>
+            <version>${jackson-bom.version}</version>
+            <type>pom</type>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.dataformat/jackson-dataformat-yaml -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.dataformat</groupId>
+            <artifactId>jackson-dataformat-yaml</artifactId>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/io.springfox/springfox-core -->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>${springfox.version}</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/io.springfox/springfox-swagger-ui -->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>${springfox.version}</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.google.guava/guava -->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>${guava.version}</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-text -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-text</artifactId>
+            <version>1.9</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/software.amazon.awssdk/kinesis -->
+        <dependency>
+            <groupId>software.amazon.awssdk</groupId>
+            <artifactId>kinesis</artifactId>
+            <version>2.15.33</version>
+        </dependency>
+
+        <!-- #######################################################################################################
+             # TEST Dependedencies -->
+
+        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-test -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.thedeanda/lorem -->
+        <dependency>
+            <groupId>com.thedeanda</groupId>
+            <artifactId>lorem</artifactId>
+            <version>${lorem.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-engine -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>${junit.jupiter.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <plugins>
+
+            <!-- -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <version>3.0.0</version>
+                <executions>
+                    <execution>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>add-source</goal>
+                        </goals>
+                        <configuration>
+                            <sources>
+                                <source>generated/src/main/java</source>
+                            </sources>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>add-test-source</id>
+                        <phase>generate-test-sources</phase>
+                        <goals>
+                            <goal>add-test-source</goal>
+                        </goals>
+                        <configuration>
+                            <sources>
+                                <source>generated/src/test/java</source>
+                            </sources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- Copy dependencies to -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-dependencies</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <silent>true</silent>
+                            <skip>false</skip>
+                            <outputDirectory>${project.build.directory}/lib</outputDirectory>
+                            <overWriteReleases>false</overWriteReleases>
+                            <overWriteSnapshots>false</overWriteSnapshots>
+                            <overWriteIfNewer>true</overWriteIfNewer>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- Since logging is so important to debugging and auditing
+                we use the enforcer plugin to fail the build if any dependencies
+                include commons-logging, log4j or slf4j-log4j12.
+                This ensures logging will function as designed.
+            -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
+                <version>1.3.1</version>
+                <executions>
+                    <execution>
+                        <id>enforce-version</id>
+                        <goals>
+                            <goal>enforce</goal>
+                        </goals>
+                        <configuration>
+                            <failFast>true</failFast>
+                            <rules>
+                                <bannedDependencies>
+                                    <excludes>
+                                        <exclude>log4j:log4j</exclude>
+                                        <exclude>commons-logging:commons-logging</exclude>
+                                        <exclude>org.slf4j:slf4j-log4j12</exclude>
+                                    </excludes>
+                                </bannedDependencies>
+                            </rules>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>3.1.1</version>
+                <executions>
+                    <execution>
+                        <id>checkstyle</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                        <configuration>
+                            <configLocation>${project.basedir}/conf/checkstyle/checkstyle.xml</configLocation>
+                            <encoding>UTF-8</encoding>
+                            <consoleOutput>true</consoleOutput>
+                            <failsOnError>true</failsOnError>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>com.github.spotbugs</groupId>
+                <artifactId>spotbugs-maven-plugin</artifactId>
+                <version>4.1.4</version>
+                <configuration>
+                    <failOnError>true</failOnError>
+                    <effort>Max</effort>
+                    <threshold>Low</threshold>
+                    <xmlOutput>true</xmlOutput>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${maven-surefire-plugin.version}</version>
+                <configuration>
+                    <useFile>false</useFile>
+                    <!--                        <argLine>${maven-surefire-plugin.argLine} ${surefireArgLine}</argLine>-->
+                    <forkCount>${maven-surefire-plugin.forkCount}</forkCount>
+                    <reuseForks>${maven-surefire-plugin.reuseForks}</reuseForks>
+                    <skipAfterFailureCount>${maven-surefire-plugin.skipAfterFailureCount}</skipAfterFailureCount>
+                    <testFailureIgnore>${maven-surefire-plugin.testFailureIgnore}</testFailureIgnore>
+                    <systemPropertyVariables>
+                        <buildDirectory>${project.build.directory}</buildDirectory>
+                        <logback.configurationFile>${logback.configurationFile}</logback.configurationFile>
+                        <com.mchange.v2.log.MLog>com.mchange.v2.log.slf4j.Slf4jMLog</com.mchange.v2.log.MLog>
+                        <surefire.trimStackTrace>false</surefire.trimStackTrace>
+                    </systemPropertyVariables>
+                    <additionalClasspathElements>
+                        <additionalClasspathElement>${pom.basedir}/src/test/resources</additionalClasspathElement>
+                    </additionalClasspathElements>
+
+                </configuration>
+            </plugin>
+
+
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>${jacoco-maven-plugin.version}</version>
+                <configuration>
+                    <destFile>${basedir}/target/coverage-reports/jacoco-unit.exec</destFile>
+                    <dataFile>${basedir}/target/coverage-reports/jacoco-unit.exec</dataFile>
+                    <propertyName>surefireArgLine</propertyName>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>jacoco-initialize</id>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>jacoco-site</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+
+        </plugins>
+    </build>
+
+
+    <reporting>
+        <excludeDefaults>true</excludeDefaults>
+        <outputDirectory>${project.build.directory}/site</outputDirectory>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-site-plugin</artifactId>
+                <version>3.5.1</version>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-project-info-reports-plugin</artifactId>
+                <version>2.9</version>
+                <configuration>
+                    <dependencyDetailsEnabled>false</dependencyDetailsEnabled>
+                    <dependencyLocationsEnabled>false</dependencyLocationsEnabled>
+                </configuration>
+                <reportSets>
+                    <reportSet>
+                        <reports>
+                            <report>index</report>
+                            <report>license</report>
+                            <report>dependencies</report>
+                            <report>scm</report>
+                        </reports>
+                    </reportSet>
+                </reportSets>
+            </plugin>
+
+            <plugin>
+                <groupId>com.github.spotbugs</groupId>
+                <artifactId>spotbugs-maven-plugin</artifactId>
+                <version>${spotbugs.plugun.version}</version>
+                <configuration>
+                    <skip>${spotbugs.skip}</skip>
+                    <effort>Max</effort>
+                    <threshold>Low</threshold>
+                    <failOnError>false</failOnError>
+                    <includeFilterFile>${spotbugs.plugin.include.filter.path}</includeFilterFile>
+                    <excludeFilterFile>${spotbugs.plugin.exclude.filter.path}</excludeFilterFile>
+                    <plugins>
+                        <plugin>
+                            <groupId>com.h3xstream.findsecbugs</groupId>
+                            <artifactId>findsecbugs-plugin</artifactId>
+                            <version>LATEST</version> <!-- Auto-update to the latest stable -->
+                        </plugin>
+                    </plugins>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>3.1.1</version>
+                <configuration>
+                    <configLocation>${maven-checkstyle-plugin.configLocation}</configLocation>
+<!--                    <excludes>${checkstyle.plugin.exclusions}</excludes>-->
+                    <encoding>UTF-8</encoding>
+                    <logViolationsToConsole>true</logViolationsToConsole>
+                    <failOnViolation>${maven-checkstyle-plugin.failOnViolation}</failOnViolation>
+                    <linkXRef>false</linkXRef>
+                    <includeTestSourceDirectory>false</includeTestSourceDirectory>
+                    <dependencies>
+                        <dependency>
+                            <groupId>com.puppycrawl.tools</groupId>
+                            <artifactId>checkstyle</artifactId>
+                            <version>${checkstyle.version}</version>
+                        </dependency>
+                    </dependencies>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.8.6</version>
+                <configuration>
+                    <destFile>${basedir}/target/coverage-reports/jacoco-unit.exec</destFile>
+                    <dataFile>${basedir}/target/coverage-reports/jacoco-unit.exec</dataFile>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.2.0</version>
+                <configuration>
+                    <failOnError>false</failOnError>
+                    <show>package</show>
+                    <version>true</version>
+                    <javadocVersion>${source.version}</javadocVersion>
+                    <detectOfflineLinks>true</detectOfflineLinks>
+                    <detectLinks>true</detectLinks>
+                    <reportSets>
+                        <reportSet>
+                            <!-- will not execute javadoc twice -->
+                            <reports>
+                                <report>javadoc-no-fork</report>
+                                <report>test-javadoc-no-fork</report>
+                            </reports>
+                        </reportSet>
+                    </reportSets>
+                    <source>${maven.compiler.source}</source>
+                    <code>javadoc:aggregate</code>
+                    <code>javadoc:test-aggregate</code>
+                    <tags>
+                        <tag>
+                            <name>todo</name>
+                            <placement>amc</placement>
+                            <head>To Do:</head>
+                        </tag>
+                        <tag>
+                            <name>pre</name>
+                            <placement>a</placement>
+                            <head>Pre-conditions:</head>
+                        </tag>
+                        <tag>
+                            <name>post</name>
+                            <placement>mc</placement>
+                            <head>Post-conditions:</head>
+                        </tag>
+                    </tags>
+                </configuration>
+            </plugin>
+
+            <!--            <plugin>-->
+<!--                <groupId>org.apache.maven.plugins</groupId>-->
+<!--                <artifactId>maven-pmd-plugin</artifactId>-->
+<!--                <version>3.13.0</version>-->
+<!--                <configuration>-->
+<!--                    <source>${maven.compiler.source}</source>-->
+<!--                    <targetJdk>${maven.compiler.target}</targetJdk>-->
+<!--                    <rulesets>-->
+<!--                        <ruleset>/rulesets/java/imports.xml</ruleset>-->
+<!--                        <ruleset>/rulesets/java/unusedcode.xml</ruleset>-->
+<!--                    </rulesets>-->
+<!--                    <systemPropertyVariables>-->
+<!--                        <buildDirectory>${project.build.directory}</buildDirectory>-->
+<!--                        <logback.configurationFile>${basedir}/conf/logback.xml</logback.configurationFile>-->
+<!--                        <com.mchange.v2.log.MLog>com.mchange.v2.log.slf4j.Slf4jMLog</com.mchange.v2.log.MLog>-->
+<!--                    </systemPropertyVariables>-->
+<!--                </configuration>-->
+<!--            </plugin>-->
+        </plugins>
+    </reporting>
+
+
+</project>

@@ -1,0 +1,134 @@
+{
+  "info" : {
+    "name" : "bml-gen-test-application",
+    "schema" : "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description" : { },
+    "version" : "0.0.1"
+  },
+  "item" : [ {
+    "name" : "accounts",
+    "item" : [ {
+      "request" : {
+        "url" : {
+          "raw" : "{{BASE_URL}}/accounts/:id",
+          "host" : [ "{{BASE_URL}}" ],
+          "path" : [ "accounts", ":id" ],
+          "query" : [ ],
+          "variable" : [ {
+            "key" : "id",
+            "value" : "{{id}}",
+            "description" : {
+              "content" : "The Universally Unique Identifier for an existing account resource. See RFC 4122"
+            },
+            "disabled" : false
+          } ]
+        },
+        "method" : "GET",
+        "header" : [ ]
+      },
+      "name" : "GET /accounts/:id",
+      "event" : [ {
+        "listen" : "test",
+        "script" : {
+          "exec" : [ "pm.test(\"GET requests should return 2xx\", function () {", "    pm.response.to.be.success;", "});" ],
+          "type" : "text/javascript"
+        }
+      } ],
+      "response" : [ {
+        "name" : "Example 200 - account",
+        "originalRequest" : {
+          "url" : {
+            "raw" : "{{BASE_URL}}/accounts/:id",
+            "host" : [ "{{BASE_URL}}" ],
+            "path" : [ "accounts", ":id" ],
+            "query" : [ ],
+            "variable" : [ {
+              "key" : "id",
+              "value" : "{{id}}",
+              "description" : {
+                "content" : "The Universally Unique Identifier for an existing account resource. See RFC 4122"
+              },
+              "disabled" : false
+            } ]
+          },
+          "method" : "GET",
+          "header" : [ ]
+        },
+        "body" : "{\n  \"id\" : \"a683686a-0d2d-41dd-84a4-4e3e30807928\",\n  \"name\" : \"Universal Remonster Ltd\",\n  \"enabled\" : true\n}",
+        "code" : 200
+      }, {
+        "name" : "Example 400 - fieldValidationResponse",
+        "originalRequest" : {
+          "url" : {
+            "raw" : "{{BASE_URL}}/accounts/:id",
+            "host" : [ "{{BASE_URL}}" ],
+            "path" : [ "accounts", ":id" ],
+            "query" : [ ],
+            "variable" : [ {
+              "key" : "id",
+              "value" : "{{id}}",
+              "description" : {
+                "content" : "The Universally Unique Identifier for an existing account resource. See RFC 4122"
+              },
+              "disabled" : false
+            } ]
+          },
+          "method" : "GET",
+          "header" : [ ]
+        },
+        "body" : "{\n  \"status\" : 1,\n  \"message\" : \"b32a01b98681\",\n  \"errors\" : [ {\n    \"path\" : \"/searches/search.query\",\n    \"message\" : \"Query parameter 'query' exceeds parameter maximum length of 512 characters.\"\n  } ]\n}",
+        "code" : 400
+      }, {
+        "name" : "Example 401 - unit",
+        "originalRequest" : {
+          "url" : {
+            "raw" : "{{BASE_URL}}/accounts/:id",
+            "host" : [ "{{BASE_URL}}" ],
+            "path" : [ "accounts", ":id" ],
+            "query" : [ ],
+            "variable" : [ {
+              "key" : "id",
+              "value" : "{{id}}",
+              "description" : {
+                "content" : "The Universally Unique Identifier for an existing account resource. See RFC 4122"
+              },
+              "disabled" : false
+            } ]
+          },
+          "method" : "GET",
+          "header" : [ ]
+        },
+        "code" : 401
+      }, {
+        "name" : "Example 404 - unit",
+        "originalRequest" : {
+          "url" : {
+            "raw" : "{{BASE_URL}}/accounts/:id",
+            "host" : [ "{{BASE_URL}}" ],
+            "path" : [ "accounts", ":id" ],
+            "query" : [ ],
+            "variable" : [ {
+              "key" : "id",
+              "value" : "{{id}}",
+              "description" : {
+                "content" : "The Universally Unique Identifier for an existing account resource. See RFC 4122"
+              },
+              "disabled" : false
+            } ]
+          },
+          "method" : "GET",
+          "header" : [ ]
+        },
+        "code" : 404
+      } ],
+      "type" : "item"
+    } ],
+    "type" : "folder"
+  } ],
+  "event" : [ ],
+  "variable" : [ {
+    "key" : "BASE_URL",
+    "value" : "",
+    "type" : "string"
+  } ]
+}

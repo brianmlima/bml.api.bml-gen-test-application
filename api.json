@@ -1,0 +1,125 @@
+{
+  "name": "bml-gen-test-application",
+  "apidoc": {"version": "0.14.68"},
+
+  "imports": [
+    {
+      "uri": "http://api.apibuilder.io/bml/validation/0.0.1/service.json"
+    },
+    {
+      "uri": "http://api.apibuilder.io/bml/annotation/0.0.1/service.json"
+    }
+  ],
+  "enums": {
+    "test_enumeration": {
+      "description": "Test Enumeration provides a useful test for enumeration based code generation",
+      "values": [
+        {
+          "name": "foo",
+          "description": "A foo enumeration entry"
+        },
+        {
+          "name": "bar",
+          "description": "A bar enumeration entry"
+        }
+      ]
+    }
+  },
+  "models": {
+    "healthcheck": {
+      "fields": [
+        { "name": "status", "type": "string", "example": "healthy" }
+      ]
+    },
+    "account_form": {
+      "fields": [
+        {
+          "name": "name",
+          "type": "string",
+          "minimum": 1,
+          "maximum": 255,
+          "example": "Universal Remonster Ltd"
+        },
+        {"name": "enabled", "type": "boolean"}
+      ]
+    },
+    "account":{
+      "description": "This is the top level in the system. It represents a specific client.",
+      "attributes": [
+        {
+          "name": "hibernate",
+          "value": {"use": true}
+        },
+        {
+          "name": "unique",
+          "value": {"indices": [["name"]]}
+        },
+        {
+          "name": "persistence",
+          "value": {"persist": true}
+        }
+      ],
+      "fields": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "description": "The Universally Unique Identifier. See RFC 4122",
+          "required": true
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "description": "A unique human readable string name ",
+          "minimum": 1,
+          "maximum": 255,
+          "example": "Universal Remonster Ltd"
+        },
+        {"name": "enabled", "type": "boolean"}
+      ]
+     }
+  },
+  "resources": {
+    "account": {
+      "operations": [
+        {
+          "method": "GET",
+          "path": "/:id",
+          "parameters": [
+            {
+              "location": "path",
+              "name": "id",
+              "type": "uuid",
+              "required": true,
+              "description": "The Universally Unique Identifier for an existing account resource. See RFC 4122"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success",
+              "type": "account"
+            },
+            "400": {
+              "description": "Bad Request",
+              "type": "org.bml.validation.v0.models.fieldValidationResponse"
+            },
+            "401": {
+              "description": "Unauthorized",
+              "type": "unit"
+            },
+            "404": {
+              "description": "Not Found",
+              "type": "unit"
+            }
+          }
+        }
+      ]
+    }
+
+
+
+
+
+
+
+  }
+}

@@ -1,0 +1,99 @@
+---
+openapi: "3.0.2"
+info:
+  contact: {}
+  license:
+    name: ""
+  termsOfService: "foo.com"
+  title: "validation"
+  version: "0.0.1"
+components:
+  schemas:
+    org.bml.validation.v0.models.fieldValidationError:
+      description: "Error description object for a single field"
+      type: "object"
+      properties:
+        path:
+          description: "The object path of the field"
+          type: "string"
+          minLength: 1
+          maxLength: 256
+        message:
+          description: "A user friendly error message."
+          type: "string"
+          minLength: 1
+          maxLength: 512
+      required:
+      - "path"
+      - "message"
+    org.bml.validation.v0.models.conflictResourceExistsResponse:
+      description: "A response object for field 409 conflict errors resulting from\
+        \ trying to create a resource that already exists."
+      type: "object"
+      properties:
+        status:
+          description: "The response status"
+          type: "integer"
+          minLength: 100
+          maxLength: 599
+        message:
+          description: "The response message"
+          type: "string"
+          minLength: 1
+          maxLength: 512
+      required:
+      - "status"
+      - "message"
+    org.bml.validation.v0.models.fieldValidationResponse:
+      description: "A response object for field validation errors"
+      type: "object"
+      properties:
+        status:
+          description: "The response status"
+          type: "integer"
+          minLength: 100
+          maxLength: 599
+        message:
+          description: "The response message"
+          type: "string"
+          minLength: 1
+          maxLength: 512
+        errors:
+          description: "A set of field validation errors"
+          type: "array"
+          items:
+            $ref: "#/components/schemas/org.bml.validation.v0.models.fieldValidationError"
+      required:
+      - "status"
+      - "message"
+      - "errors"
+    org.bml.validation.v0.models.fieldValidationErrorType:
+      description: "Error types for field validation<br> <ol><br> <li><b>isNull</b>\
+        \ </li><br> <li><b>isEmpty</b> </li><br> <li><b>minimumLength</b> </li><br>\
+        \ <li><b>maximumLength</b> </li><br> <li><b>pattern</b> </li><br> <li><b>syntax</b>\
+        \ </li><br> </ol>"
+      type: "string"
+      enum:
+      - "isNull"
+      - "isEmpty"
+      - "minimumLength"
+      - "maximumLength"
+      - "pattern"
+      - "syntax"
+    org.bml.validation.v0.models.fieldValidationErrorEntry:
+      description: "A single validation error description"
+      type: "object"
+      properties:
+        message:
+          description: "A user friendly error message."
+          type: "string"
+          minLength: 1
+          maxLength: 512
+        errors:
+          description: "A field validation type"
+          oneOf:
+          - $ref: "#/components/schemas/org.bml.validation.v0.models.fieldValidationErrorType"
+      required:
+      - "message"
+      - "errors"
+  securitySchemes: {}

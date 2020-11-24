@@ -1,0 +1,7 @@
+apibuilder:
+  client:
+    version: 0.14.68
+  app:
+    organization: "bml"
+    application: "bml-gen-test-application"
+    version: "0.0.1"

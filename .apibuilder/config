@@ -1,0 +1,31 @@
+---
+settings:
+  code.create.directories: true
+code:
+  bml:
+    bml-gen-test-application:
+      version: 0.0.1
+      generators:
+        openapi:
+          target: generated/src/main/resources/bml-gen-test-application
+        bml_lombok:
+          target: generated/src/main/java
+        spring_service:
+          target: generated/src/main/java
+        jpa_repository:
+          target: generated/src/main/java
+        bml_lombok_test:
+          target: generated/src/test/java
+        java_client:
+          target: generated/src/test/java
+        postman_collection_2_1:
+          target: generated/src/main/resources
+    validation:
+      version: 0.0.1
+      generators:
+        bml_openapi:
+          target: generated/src/main/resources/static/bml-gen-test-application
+        bml_lombok:
+          target: generated/src/main/java
+        bml_lombok_test:
+          target: generated/src/test/java

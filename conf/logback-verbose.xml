@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true">
+    <!-- always a good activate OnConsoleStatusListener for testing -->
+    <!--
+    <statusListener class="ch.qos.logback.core.status.OnConsoleStatusListener" />
+    -->
+    <statusListener class="ch.qos.logback.core.status.NopStatusListener"/>
+    <shutdownHook/>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <target>System.err</target>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} \(%line\) - %msg%n</Pattern>
+        </layout>
+    </appender>
+
+    <!-- The root logger sets the level for anything not set below -->
+    <root level="DEBUG" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </root>
+
+
+    <!-- ################################################################### -->
+    <!-- BEGIN SPRING FRAMEWORK -->
+    <logger name="org.springframework" level="INFO" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+    <logger name="org.springframework.beans" level="WARN" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+
+    <logger name="org.springframework.security" level="INFO" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+
+    <logger name="org.springframework.security.core.SpringSecurityCoreVersion" level="WARN" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+    <logger name="org.springframework.security.acls.domain.EhCacheBasedAclCache" level="WARN" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+    <logger name="org.springframework.security.config" level="INFO" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+
+    <logger name="org.springframework.beans.factory.support.DefaultListableBeanFactory" level="WARN" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+
+    <logger name="org.springframework.beans.factory.support.DisposableBeanAdapter" level="WARN" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+
+
+    <logger name="org.springframework.security.config.debug.SecurityDebugBeanFactoryPostProcessor" level="WARN"
+            additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+
+    <logger name="org.springframework.orm.jpa" level="WARN" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+
+
+    <!-- Change me for filter issues-->
+    <logger name="org.springframework.security.web" level="INFO" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+
+
+    <!-- Quiets down the logging for Spring / tomcat interaction -->
+    <logger name="org.apache.tomcat" level="INFO" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+
+    <logger name="org.apache.catalina" level="INFO" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+
+    <!-- END SPRING FRAMEWORK -->
+    <!-- ################################################################### -->
+
+    <!-- ################################################################### -->
+    <!-- BEGIN C3PO -->
+    <logger name="com.mchange.v2.c3p0" level="INFO" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+    <!-- END C3PO -->
+    <!-- ################################################################### -->
+
+    <!-- ################################################################### -->
+    <!-- BEGIN HIBERNATE LOGGING -->
+
+
+    <logger name="org.hibernate" level="WARN" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+    <logger name="org.hibernate.type" level="WARN" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+    <!-- END HIBERNATE LOGGING -->
+    <!-- ################################################################### -->
+
+    <!-- ################################################################### -->
+    <!-- BEGIN MISC ######################################################## -->
+
+    <!-- Keeps the logback config quiet, set to debug to debug logging settings.
+    This is really here so that it is easy to set for debugging.
+    -->
+    <logger name="ch.qos.logback" level="WARN" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+
+
+    <!-- Stops the detailed logging of every http tcpip transcation -->
+    <logger name="org.apache.http.wire" level="WARN" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+
+
+    <logger name="com.pairity.control.security" level="INFO" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+    <logger name="com.pairity.control.graphql" level="INFO" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+
+
+    <logger name="com.pairity.control.service" level="INFO" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+
+    <logger name="com.pairity.control.graphql.model.fields.user.UserDataFetcher" level="INFO" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+
+    <logger name="com.pairity.control.graphql.model.fields.user.UserDataFetcherImpl" level="TRACE" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+
+    <logger name="org.springframework.beans.factory.config.PropertiesFactoryBean" level="INFO" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+    <logger name="org.flywaydb" level="ERROR" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+
+    <logger name="org.springframework.security.access.prepost.PrePostAnnotationSecurityMetadataSource" level="INFO"
+            additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+    <logger name="org.springframework.security.access.intercept.aopalliance.MethodSecurityInterceptor" level="INFO"
+            additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+
+    <logger name="com.pairity.control.security.PairityAclPermissionEvaluator" level="INFO" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+
+
+    <logger name="org.springframework.security.acls.AclPermissionEvaluator" level="INFO" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+
+    <logger name="org.springframework.security.access.expression.method.PairityDefaultMethodSecurityExpressionHandler"
+            level="TRACE"
+            additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+    <logger name="org.springframework.security.access.expression.method.PairityMethodSecurityExpressionRoot"
+            level="TRACE"
+            additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+
+
+    <logger name="com.pairity.control.security.PairityAclAuthorizationStrategy" level="INFO" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+    <logger name="org.springframework.security.acls.jdbc.JdbcMutableAclService" level="INFO" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+
+    <logger name="com.pairity.graphql.executor.GraphQlExecutorImpl" level="DEBUG" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+
+    <logger name="com.pairity.graphql.controller.GraphQlControllerImpl" level="TRACE" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+
+    <logger name="com.pairity.control.graphql.model.datafetcher.impl" level="INFO" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+
+    <logger name="com.pairity.control.graphql.model.fields" level="INFO" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+
+
+    <!-- Logging for JWT filter.-->
+    <logger name="com.pairity.security.jwt.security.auth.jwt.JwtTokenAuthenticationProcessingFilter" level="WARN"
+            additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+
+
+    <!-- Logging for testing database, in memory postgres.-->
+
+    <logger name="com.opentable.db.postgres" level="WARN" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+
+
+    <logger name="net.sf.ehcache.config" level="INFO" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+
+
+    <logger name="com.pairity.control.graphql.model.fields.client.ClientDataFetcher" level="INFO" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+
+    <logger name="com.pairity.control.graphql.CreateUserTests" level="INFO" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+
+    <logger name="org.springframework.web.filter.CorsFilter" level="INFO" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+
+
+    <logger name="com.pairity.security.jwt" level="INFO" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+
+    <logger name="com.pairity.testingframework.testtools" level="INFO" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+
+    <logger name="com.pairity.graphql.util.InputBase" level="INFO" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+
+    <logger name="com.pairity.control.graphql.model.fields.portfolio.PortfolioDataFetcherImpl" level="INFO"
+            additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+    <logger name="com.pairity.control.service.services.impl.PairityUserServiceImpl" level="TRACE" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+
+    <logger name="com.pairity.control.service.services.impl.PairityServiceBase" level="TRACE" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+
+    <logger name="com.pairity.control.graphql.model.fields.user.UserGQL" level="TRACE" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+
+    <logger name="com.pairity.control.service.services.PhoneNumberService" level="TRACE" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+
+    <logger name="org.apache.http.client" level="TRACE" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+
+    <!-- ########################################################################################################### -->
+    <!-- ########################################################################################################### -->
+    <!-- SCORING ################################################################################################### -->
+    <logger name="com.pairity.control.scoring.smb.util.rest" level="TRACE" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+
+    <logger name="com.pairity.control.scoring.smb.SMBProviderRecord" level="TRACE" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+
+    <logger name="com.pairity.control.scoring.smb.util.rest.MBRestBase" level="TRACE" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+
+    <!-- ########################################################################################################### -->
+    <!-- ########################################################################################################### -->
+    <!-- HTTP ###################################################################################################### -->
+
+    <logger name="org.apache.http.headers." level="INFO" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+
+
+
+
+
+</configuration>
